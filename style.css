@@ -77,3 +77,16 @@ footer{
     border-radius:10px;
     margin-bottom:15px;
 }
+
+.trust{
+    background:white;
+    padding:40px;
+    text-align:center;
+    margin:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.trust h2{
+    color:#ff6600;
+}
