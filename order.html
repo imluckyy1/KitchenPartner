@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Order - Kitchen Partner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Kitchen Partner</h1>
+    <p>Complete Your Order</p>
+</header>
+
+<div class="order-form">
+
+<h2>Order Form</h2>
+
+<form id="orderForm">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="tel" name="mobile" placeholder="Mobile Number" required>
+
+<textarea name="address" placeholder="Full Address" required></textarea>
+
+<input type="text" name="pincode" placeholder="PIN Code" required>
+
+<select name="product" id="product" required>
+<option value="">Select Product</option>
+<option>Kitchen Dispenser</option>
+<option>Wall Hooks</option>
+<option>Vegetable Chopper (Small)</option>
+<option>Vegetable Chopper (Large)</option>
+<option>Mini Foldable Desktop Mop Cleaner</option>
+</select>
+
+<input type="number" name="quantity" placeholder="Quantity" value="1" required>
+
+<select name="payment" id="payment" required>
+<option value="">Payment Method</option>
+<option value="COD">Cash on Delivery</option>
+<option value="UPI">UPI</option>
+</select>
+
+<div id="upiSection" style="display:none;">
+
+    <h3>UPI Payment</h3>
+
+    <img src="images/payment-qr.jpg" class="upi-qr">
+
+    <p>
+        UPI ID: <b>9389927696-2@ybl</b>
+    </p>
+
+    <input
+        type="text"
+        name="transactionid"
+        id="transactionid"
+        placeholder="Enter UPI Transaction ID">
+
+</div>
+
+<button type="submit">Place Order</button>
+
+</form>
+
+</div>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzxQ8yxPJyA6c6QxIiIwv75neTSoMoc8kuT4ZHHaH9J4o2tlbuvaXmSElHz8CN_TpLgGA/exec";
+
+document.getElementById("orderForm").addEventListener("submit", async function(e){
+
+e.preventDefault();
+
+const formData = {
+name: this.name.value,
+mobile: this.mobile.value,
+address: this.address.value,
+pincode: this.pincode.value,
+product: this.product.value,
+quantity: this.quantity.value,
+payment: this.payment.value,
+transactionid: this.transactionid.value
+};
+
+await fetch(scriptURL,{
+method:"POST",
+body:JSON.stringify(formData)
+});
+
+window.location.href="success.html";
+
+});
+</script>
+
+<script>
+
+const paymentSelect = document.getElementById("payment");
+const upiSection = document.getElementById("upiSection");
+const transactionInput = document.getElementById("transactionid");
+
+paymentSelect.addEventListener("change", function(){
+
+    if(this.value === "UPI"){
+
+        upiSection.style.display = "block";
+        transactionInput.required = true;
+
+    }else{
+
+        upiSection.style.display = "none";
+        transactionInput.required = false;
+
+    }
+
+});
+
+</script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const product = params.get("product");
+
+if(product){
+    document.getElementById("product").value = product;
+}
+</script>
+
+</body>
+</html>
