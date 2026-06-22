@@ -246,3 +246,31 @@ footer{
     margin-top:20px;
     text-align:center;
 }
+
+.old-price{
+    text-decoration:line-through;
+    color:gray;
+    margin-right:10px;
+}
+
+.new-price{
+    color:#ff6600;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.save{
+    color:green;
+    font-weight:bold;
+}
+
+.badge{
+    background:red;
+    color:white;
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:5px;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
